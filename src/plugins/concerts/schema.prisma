@@ -1,0 +1,17 @@
+// Concerts Plugin Schema
+// This file is automatically copied to prisma/schema/ during build
+
+model Concert {
+  id          String   @id @default(cuid())
+  title       String
+  venue       String
+  city        String
+  date        DateTime
+  time        String
+  description String?
+  ticketUrl   String?
+  imageUrl    String?
+  published   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
