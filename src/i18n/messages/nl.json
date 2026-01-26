@@ -1,0 +1,38 @@
+{
+    "common": {
+        "home": "Home",
+        "news": "Nieuws",
+        "about": "Over ons",
+        "contact": "Contact",
+        "readMore": "Lees meer",
+        "viewAll": "Bekijk alles",
+        "back": "Terug",
+        "loading": "Laden...",
+        "error": "Er ging iets mis",
+        "noResults": "Geen resultaten gevonden",
+        "learnMore": "Meer informatie"
+    },
+    "navigation": {
+        "quickLinks": "Snelle links",
+        "followUs": "Volg ons"
+    },
+    "home": {
+        "welcome": "Welkom",
+        "latestNews": "Laatste nieuws",
+        "viewLatestNews": "Bekijk laatste nieuws"
+    },
+    "news": {
+        "title": "Nieuws",
+        "description": "Laatste nieuws en updates",
+        "featured": "Uitgelicht",
+        "noNews": "Nog geen nieuwsberichten. Kom binnenkort terug!",
+        "publishedOn": "Gepubliceerd op"
+    },
+    "footer": {
+        "allRightsReserved": "Alle rechten voorbehouden"
+    },
+    "language": {
+        "switchTo": "Schakel naar {language}",
+        "current": "Huidige taal: {language}"
+    }
+}

@@ -419,6 +419,115 @@ const isEnabled = await isServerPluginEnabled('your-plugin')
 const publicPath = await getServerPluginPublicPath('your-plugin')
 ```
 
+## Plugin Translations (i18n)
+
+Plugins can provide their own translations, which are automatically merged with the core CMS translations. This keeps your plugin fully self-contained.
+
+### 1. Create Translation Files
+
+Create an `i18n/` folder in your plugin with JSON files for each supported locale:
+
+```
+src/plugins/your-plugin/
+  i18n/
+    en.json
+    nl.json
+```
+
+Each translation file should contain a namespace matching your plugin id:
+
+```json
+// src/plugins/your-plugin/i18n/en.json
+{
+    "your-plugin": {
+        "navName": "Your Feature",
+        "title": "Your Feature",
+        "description": "Description of your feature",
+        "noItems": "No items found.",
+        "addNew": "Add New Item"
+    }
+}
+```
+
+```json
+// src/plugins/your-plugin/i18n/nl.json
+{
+    "your-plugin": {
+        "navName": "Jouw Functie",
+        "title": "Jouw Functie",
+        "description": "Beschrijving van jouw functie",
+        "noItems": "Geen items gevonden.",
+        "addNew": "Nieuw item toevoegen"
+    }
+}
+```
+
+**Important:** The `navName` key is used for the navigation menu (header, footer, sidebar). If not provided, the plugin's `name` property will be used instead.
+
+### 2. Register Translations in Plugin Definition
+
+Import your translation files and add them to the plugin definition:
+
+```typescript
+// src/plugins/your-plugin/index.tsx
+import { PluginDefinition } from '@/lib/plugins/types'
+import translationsEn from './i18n/en.json'
+import translationsNl from './i18n/nl.json'
+
+export const plugin: PluginDefinition = {
+  id: 'your-plugin',
+  name: 'Your Plugin',
+  // ... other fields
+
+  // Add translations for each supported locale
+  translations: {
+    en: translationsEn,
+    nl: translationsNl,
+  },
+}
+```
+
+### 3. Use Translations in Components
+
+**In Server Components:**
+
+```tsx
+import { getTranslations } from 'next-intl/server'
+
+export async function YourComponent() {
+  const t = await getTranslations('your-plugin')
+  
+  return (
+    <div>
+      <h1>{t('title')}</h1>
+      <p>{t('description')}</p>
+    </div>
+  )
+}
+```
+
+**In Client Components:**
+
+```tsx
+'use client'
+import { useTranslations } from 'next-intl'
+
+export function YourClientComponent() {
+  const t = useTranslations('your-plugin')
+  
+  return (
+    <button>{t('addNew')}</button>
+  )
+}
+```
+
+### Translation Best Practices
+
+- **Use your plugin ID as the namespace** - This prevents conflicts with other plugins
+- **Provide all supported locales** - Currently `en` and `nl` are supported
+- **Keep translations close to your plugin code** - Makes the plugin fully self-contained
+- **Translations are only loaded when the plugin is enabled** - No overhead for disabled plugins
+
 ### Client-Side Hooks
 
 ```typescript

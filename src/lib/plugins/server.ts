@@ -69,16 +69,28 @@ export async function getServerPluginPublicPath(pluginId: string): Promise<strin
 
 /**
  * Get navigation items for enabled plugins
+ * @param locale - Optional locale for translated nav names
  */
-export async function getEnabledPluginNavItems(): Promise<Array<{ name: string; href: string }>> {
+export async function getEnabledPluginNavItems(locale?: string): Promise<Array<{ name: string; href: string }>> {
     const plugins = await getServerEnabledPlugins()
     const navItems: Array<{ name: string; href: string }> = []
 
     for (const plugin of plugins) {
         if (plugin.adminNavigation && plugin.defaultPublicPath) {
             const publicPath = plugin.customPublicPath || plugin.defaultPublicPath
+
+            // Try to get translated name from plugin translations
+            let name = plugin.adminNavigation.name
+            if (locale && plugin.translations?.[locale]) {
+                const pluginTranslations = plugin.translations[locale] as Record<string, Record<string, string>>
+                const pluginNamespace = pluginTranslations[plugin.id]
+                if (pluginNamespace?.navName) {
+                    name = pluginNamespace.navName
+                }
+            }
+
             navItems.push({
-                name: plugin.adminNavigation.name,
+                name,
                 href: publicPath,
             })
         }
@@ -122,4 +134,22 @@ export async function getEnabledHomepageSections(): Promise<
     sections.sort((a, b) => b.priority - a.priority)
 
     return sections
+}
+
+/**
+ * Get translations from all enabled plugins for a specific locale
+ * Returns an object that can be merged with core translations
+ */
+export async function getPluginTranslations(locale: string): Promise<Record<string, unknown>> {
+    const plugins = await getServerEnabledPlugins()
+    const translations: Record<string, unknown> = {}
+
+    for (const plugin of plugins) {
+        if (plugin.translations && plugin.translations[locale]) {
+            // Merge plugin translations into the main translations object
+            Object.assign(translations, plugin.translations[locale])
+        }
+    }
+
+    return translations
 }

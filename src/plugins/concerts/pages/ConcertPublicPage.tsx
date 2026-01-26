@@ -1,7 +1,14 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { format, isBefore, startOfDay } from 'date-fns'
+import { format, isBefore, startOfDay, Locale } from 'date-fns'
+import { useTranslations, useLocale } from 'next-intl'
+import { nl, enGB } from 'date-fns/locale'
+
+const dateLocales: Record<string, Locale> = {
+  en: enGB,
+  nl: nl,
+}
 
 interface Concert {
   id: string
@@ -26,6 +33,10 @@ export function ConcertPublicPage({ pluginId }: Props) {
   const [concerts, setConcerts] = useState<Concert[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const t = useTranslations('concerts')
+  const tCommon = useTranslations('common')
+  const locale = useLocale()
+  const dateLocale = dateLocales[locale] || enGB
 
   useEffect(() => {
     async function fetchConcerts() {
@@ -74,13 +85,13 @@ export function ConcertPublicPage({ pluginId }: Props) {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-8">
-        Concerts
+        {t('title')}
       </h1>
 
       {/* Upcoming Concerts */}
       <section className="mb-16">
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-          Upcoming Shows
+          {t('upcomingConcerts')}
         </h2>
 
         {upcomingConcerts.length > 0 ? (
@@ -105,10 +116,10 @@ export function ConcertPublicPage({ pluginId }: Props) {
                   {/* Date */}
                   <div className="flex-shrink-0 text-center md:w-24">
                     <div className="text-3xl font-bold text-primary-600">
-                      {format(new Date(concert.date), 'd')}
+                      {format(new Date(concert.date), 'd', { locale: dateLocale })}
                     </div>
                     <div className="text-sm text-gray-500 dark:text-gray-400 uppercase">
-                      {format(new Date(concert.date), 'MMM yyyy')}
+                      {format(new Date(concert.date), 'MMM yyyy', { locale: dateLocale })}
                     </div>
                   </div>
 
@@ -139,7 +150,7 @@ export function ConcertPublicPage({ pluginId }: Props) {
                         rel="noopener noreferrer"
                         className="btn-primary"
                       >
-                        Get Tickets
+                        {t('getTickets')}
                       </a>
                     </div>
                   )}
@@ -150,10 +161,7 @@ export function ConcertPublicPage({ pluginId }: Props) {
         ) : (
           <div className="text-center py-12 bg-gray-50 dark:bg-gray-800 rounded-xl">
             <p className="text-gray-500 dark:text-gray-400 text-lg">
-              No upcoming shows scheduled.
-            </p>
-            <p className="text-gray-400 dark:text-gray-500 mt-2">
-              Check back soon for new dates!
+              {t('noUpcoming')}
             </p>
           </div>
         )}
@@ -163,7 +171,7 @@ export function ConcertPublicPage({ pluginId }: Props) {
       {pastConcerts.length > 0 && (
         <section>
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-            Past Shows
+            {t('pastConcerts')}
           </h2>
           <div className="space-y-3">
             {pastConcerts.map((concert) => (
@@ -185,7 +193,7 @@ export function ConcertPublicPage({ pluginId }: Props) {
                 <div className="p-4 flex flex-col md:flex-row md:items-center gap-4 flex-1">
                   <div className="flex-shrink-0 md:w-24 text-center">
                     <div className="text-lg font-semibold text-gray-500 dark:text-gray-400">
-                      {format(new Date(concert.date), 'MMM d, yyyy')}
+                      {format(new Date(concert.date), 'MMM d, yyyy', { locale: dateLocale })}
                     </div>
                   </div>
                   <div className="flex-1 md:border-l md:border-gray-200 dark:md:border-gray-700 md:pl-6">

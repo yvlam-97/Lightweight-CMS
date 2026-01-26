@@ -1,6 +1,13 @@
 import Link from 'next/link'
 import { prisma } from '@/lib/prisma'
 import { format } from 'date-fns'
+import { getTranslations, getLocale } from 'next-intl/server'
+import { nl, enGB } from 'date-fns/locale'
+
+const dateLocales = {
+  en: enGB,
+  nl: nl,
+}
 
 export const metadata = {
   title: 'News',
@@ -16,19 +23,23 @@ async function getNews() {
 
 export default async function NewsPage() {
   const news = await getNews()
-  
+  const t = await getTranslations('news')
+  const tCommon = await getTranslations('common')
+  const locale = await getLocale() as 'en' | 'nl'
+  const dateLocale = dateLocales[locale]
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <h1 className="text-4xl font-bold text-gray-900 mb-8">News</h1>
-      
+      <h1 className="text-4xl font-bold text-gray-900 mb-8">{t('title')}</h1>
+
       {news.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {news.map((post) => (
             <Link key={post.id} href={`/news/${post.slug}`} className="card group">
               {post.imageUrl && (
                 <div className="aspect-video bg-gray-200 overflow-hidden">
-                  <img 
-                    src={post.imageUrl} 
+                  <img
+                    src={post.imageUrl}
                     alt={post.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
@@ -37,11 +48,11 @@ export default async function NewsPage() {
               <div className="p-6">
                 <div className="flex items-center gap-2 mb-2">
                   <span className="text-sm text-gray-500">
-                    {format(new Date(post.createdAt), 'MMMM d, yyyy')}
+                    {format(new Date(post.createdAt), 'MMMM d, yyyy', { locale: dateLocale })}
                   </span>
                   {post.featured && (
                     <span className="bg-primary-100 text-primary-700 text-xs px-2 py-1 rounded-full">
-                      Featured
+                      {t('featured')}
                     </span>
                   )}
                 </div>
@@ -50,7 +61,7 @@ export default async function NewsPage() {
                 </h2>
                 <p className="text-gray-600 line-clamp-3">{post.excerpt}</p>
                 <span className="inline-block mt-4 text-primary-600 font-medium">
-                  Read more →
+                  {tCommon('readMore')} →
                 </span>
               </div>
             </Link>
@@ -58,7 +69,7 @@ export default async function NewsPage() {
         </div>
       ) : (
         <div className="text-center py-16">
-          <p className="text-gray-500 text-lg">No news posts yet. Check back soon!</p>
+          <p className="text-gray-500 text-lg">{t('noNews')}</p>
         </div>
       )}
     </div>

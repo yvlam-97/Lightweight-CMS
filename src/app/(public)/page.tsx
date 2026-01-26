@@ -2,6 +2,13 @@ import Link from 'next/link'
 import { prisma } from '@/lib/prisma'
 import { format } from 'date-fns'
 import { getEnabledHomepageSections, getServerEnabledPlugins } from '@/lib/plugins/server'
+import { getTranslations, getLocale } from 'next-intl/server'
+import { nl, enGB } from 'date-fns/locale'
+
+const dateLocales = {
+  en: enGB,
+  nl: nl,
+}
 
 async function getData() {
   const [settings, news] = await Promise.all([
@@ -20,6 +27,11 @@ export default async function HomePage() {
   const { settings, news } = await getData()
   const enabledPlugins = await getServerEnabledPlugins()
   const homepageSections = await getEnabledHomepageSections()
+  const t = await getTranslations('home')
+  const tNews = await getTranslations('news')
+  const tCommon = await getTranslations('common')
+  const locale = await getLocale() as 'en' | 'nl'
+  const dateLocale = dateLocales[locale]
 
   // Get primary CTA link from enabled plugins (first one with a public path)
   const primaryPlugin = enabledPlugins.find(p => p.defaultPublicPath || p.customPublicPath)
@@ -66,7 +78,7 @@ export default async function HomePage() {
                 href="/news"
                 className="btn bg-white/10 text-white hover:bg-white/20 text-lg px-8 py-3 border border-white/30"
               >
-                Latest News
+                {t('latestNews')}
               </Link>
             </div>
           </div>
@@ -86,9 +98,9 @@ export default async function HomePage() {
       <section className="py-16 bg-gray-100 dark:bg-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center mb-8">
-            <h2 className="text-3xl font-bold text-gray-900">Latest News</h2>
+            <h2 className="text-3xl font-bold text-gray-900">{t('latestNews')}</h2>
             <Link href="/news" className="text-primary-600 hover:text-primary-700 font-medium">
-              View all →
+              {tCommon('viewAll')} →
             </Link>
           </div>
 
@@ -107,7 +119,7 @@ export default async function HomePage() {
                   )}
                   <div className="p-6">
                     <div className="text-sm text-gray-500 mb-2">
-                      {format(new Date(post.createdAt), 'MMMM d, yyyy')}
+                      {format(new Date(post.createdAt), 'MMMM d, yyyy', { locale: dateLocale })}
                     </div>
                     <h3 className="font-bold text-xl mb-2 group-hover:text-primary-600 transition-colors">
                       {post.title}
@@ -118,7 +130,7 @@ export default async function HomePage() {
               ))}
             </div>
           ) : (
-            <p className="text-gray-500 text-center py-8">No news posts yet. Check back soon!</p>
+            <p className="text-gray-500 text-center py-8">{tNews('noNews')}</p>
           )}
         </div>
       </section>

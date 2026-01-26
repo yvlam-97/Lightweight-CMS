@@ -1,0 +1,38 @@
+{
+    "common": {
+        "home": "Home",
+        "news": "News",
+        "about": "About",
+        "contact": "Contact",
+        "readMore": "Read more",
+        "viewAll": "View all",
+        "back": "Back",
+        "loading": "Loading...",
+        "error": "Something went wrong",
+        "noResults": "No results found",
+        "learnMore": "Learn More"
+    },
+    "navigation": {
+        "quickLinks": "Quick Links",
+        "followUs": "Follow Us"
+    },
+    "home": {
+        "welcome": "Welcome",
+        "latestNews": "Latest News",
+        "viewLatestNews": "View Latest News"
+    },
+    "news": {
+        "title": "News",
+        "description": "Latest news and updates",
+        "featured": "Featured",
+        "noNews": "No news posts yet. Check back soon!",
+        "publishedOn": "Published on"
+    },
+    "footer": {
+        "allRightsReserved": "All rights reserved"
+    },
+    "language": {
+        "switchTo": "Switch to {language}",
+        "current": "Current language: {language}"
+    }
+}

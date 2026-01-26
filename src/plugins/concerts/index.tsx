@@ -22,6 +22,10 @@ import { ConcertsHomepageSection } from './components/HomepageSection'
 import * as concertsApi from './api/concerts'
 import * as concertByIdApi from './api/concert-by-id'
 
+// Import translations
+import translationsEn from './i18n/en.json'
+import translationsNl from './i18n/nl.json'
+
 // Calendar Icon for the admin navigation
 function CalendarIcon({ className }: { className?: string }) {
   return (
@@ -51,6 +55,12 @@ export const plugin: PluginDefinition = {
 
   // Default URL for public concert listing
   defaultPublicPath: '/concerts',
+
+  // Plugin translations (merged with core translations)
+  translations: {
+    en: translationsEn,
+    nl: translationsNl,
+  },
 
   // Admin navigation item - now uses the dynamic plugin route
   adminNavigation: {

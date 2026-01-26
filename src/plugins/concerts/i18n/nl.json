@@ -1,0 +1,15 @@
+{
+    "concerts": {
+        "navName": "Concerten",
+        "title": "Concerten",
+        "upcomingConcerts": "Aankomende concerten",
+        "pastConcerts": "Afgelopen concerten",
+        "getTickets": "Tickets kopen",
+        "noUpcoming": "Geen aankomende evenementen gepland. Kom binnenkort terug!",
+        "noPast": "Geen afgelopen concerten om te tonen.",
+        "venue": "Locatie",
+        "date": "Datum",
+        "time": "Tijd",
+        "location": "Locatie"
+    }
+}

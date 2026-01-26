@@ -4,6 +4,8 @@ import './globals.css'
 import { AuthProvider } from '@/components/AuthProvider'
 import { ThemeProvider } from '@/components/ThemeProvider'
 import { PluginProvider } from '@/lib/plugins/context'
+import { NextIntlClientProvider } from 'next-intl'
+import { getMessages, getLocale } from 'next-intl/server'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -12,17 +14,22 @@ export const metadata: Metadata = {
   description: 'My lightweight CMS website',
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const locale = await getLocale()
+  const messages = await getMessages()
+
   return (
-    <html lang="en">
+    <html lang={locale}>
       <body className={inter.className}>
         <ThemeProvider>
           <AuthProvider>
-            <PluginProvider>{children}</PluginProvider>
+            <NextIntlClientProvider messages={messages}>
+              <PluginProvider>{children}</PluginProvider>
+            </NextIntlClientProvider>
           </AuthProvider>
         </ThemeProvider>
       </body>

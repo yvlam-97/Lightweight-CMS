@@ -1,7 +1,14 @@
 import Link from 'next/link'
 import { prisma } from '@/lib/prisma'
-import { format } from 'date-fns'
+import { format, Locale } from 'date-fns'
 import { HomepageSectionProps } from '@/lib/plugins/types'
+import { getTranslations, getLocale } from 'next-intl/server'
+import { nl, enGB } from 'date-fns/locale'
+
+const dateLocales: Record<string, Locale> = {
+    en: enGB,
+    nl: nl,
+}
 
 async function getUpcomingConcerts() {
     try {
@@ -21,19 +28,23 @@ async function getUpcomingConcerts() {
 
 export async function ConcertsHomepageSection({ publicPath }: HomepageSectionProps) {
     const concerts = await getUpcomingConcerts()
+    const t = await getTranslations('concerts')
+    const tCommon = await getTranslations('common')
+    const locale = await getLocale()
+    const dateLocale = dateLocales[locale] || enGB
 
     return (
         <section className="py-16 bg-white dark:bg-gray-900">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center mb-8">
                     <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
-                        Upcoming Concerts
+                        {t('upcomingConcerts')}
                     </h2>
                     <Link
                         href={publicPath}
                         className="text-primary-600 hover:text-primary-700 font-medium"
                     >
-                        View all →
+                        {tCommon('viewAll')} →
                     </Link>
                 </div>
 
@@ -45,7 +56,7 @@ export async function ConcertsHomepageSection({ publicPath }: HomepageSectionPro
                                 className="card p-6 hover:shadow-lg transition-shadow border-l-4 border-primary-600"
                             >
                                 <div className="text-primary-600 font-bold text-sm mb-2">
-                                    {format(new Date(concert.date), 'd MMM yyyy')}
+                                    {format(new Date(concert.date), 'd MMM yyyy', { locale: dateLocale })}
                                 </div>
                                 <h3 className="font-bold text-lg mb-1 dark:text-white">
                                     {concert.title}
@@ -66,7 +77,7 @@ export async function ConcertsHomepageSection({ publicPath }: HomepageSectionPro
                                         rel="noopener noreferrer"
                                         className="inline-block mt-4 text-primary-600 hover:text-primary-700 font-medium text-sm"
                                     >
-                                        Get Tickets →
+                                        {t('getTickets')} →
                                     </a>
                                 )}
                             </div>
@@ -74,7 +85,7 @@ export async function ConcertsHomepageSection({ publicPath }: HomepageSectionPro
                     </div>
                 ) : (
                     <p className="text-gray-500 dark:text-gray-400 text-center py-8">
-                        No upcoming events scheduled. Check back soon!
+                        {t('noUpcoming')}
                     </p>
                 )}
             </div>

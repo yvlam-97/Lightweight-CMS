@@ -80,13 +80,14 @@ model Page {
 }
 
 model SiteSettings {
-  id           String  @id @default("main")
-  siteName     String  @default("My Site")
-  tagline      String  @default("Welcome to our site")
-  heroImageUrl String?
-  aboutText    String?
-  primaryColor String  @default("#dc2626")
-  socialLinks  String?
+  id            String  @id @default("main")
+  siteName      String  @default("My Site")
+  tagline       String  @default("Welcome to our site")
+  heroImageUrl  String?
+  aboutText     String?
+  primaryColor  String  @default("#dc2626")
+  defaultLocale String  @default("en")
+  socialLinks   String?
 }
 
 model PluginState {

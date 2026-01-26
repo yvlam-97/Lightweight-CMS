@@ -2,26 +2,8 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-
-const colorPresets = [
-  { name: 'Red', hex: '#dc2626' },
-  { name: 'Orange', hex: '#ea580c' },
-  { name: 'Amber', hex: '#d97706' },
-  { name: 'Yellow', hex: '#ca8a04' },
-  { name: 'Lime', hex: '#65a30d' },
-  { name: 'Green', hex: '#16a34a' },
-  { name: 'Emerald', hex: '#059669' },
-  { name: 'Teal', hex: '#0d9488' },
-  { name: 'Cyan', hex: '#0891b2' },
-  { name: 'Sky', hex: '#0284c7' },
-  { name: 'Blue', hex: '#2563eb' },
-  { name: 'Indigo', hex: '#4f46e5' },
-  { name: 'Violet', hex: '#7c3aed' },
-  { name: 'Purple', hex: '#9333ea' },
-  { name: 'Fuchsia', hex: '#c026d3' },
-  { name: 'Pink', hex: '#db2777' },
-  { name: 'Rose', hex: '#e11d48' },
-]
+import { colorPresets } from '@/lib/colors'
+import { locales, localeNames, type Locale } from '@/i18n/config'
 
 interface Settings {
   id: string
@@ -30,7 +12,7 @@ interface Settings {
   heroImageUrl: string | null
   aboutText: string | null
   primaryColor?: string | null
-  socialLinks: string | null
+  defaultLocale?: string | null
 }
 
 interface Props {
@@ -42,18 +24,13 @@ export function SettingsForm({ settings }: Props) {
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState('')
 
-  const socialLinks = settings?.socialLinks ? JSON.parse(settings.socialLinks) : {}
-
   const [formData, setFormData] = useState({
     siteName: settings?.siteName || '',
     tagline: settings?.tagline || '',
     heroImageUrl: settings?.heroImageUrl || '',
     aboutText: settings?.aboutText || '',
     primaryColor: settings?.primaryColor || '#dc2626',
-    instagram: socialLinks.instagram || '',
-    facebook: socialLinks.facebook || '',
-    youtube: socialLinks.youtube || '',
-    spotify: socialLinks.spotify || '',
+    defaultLocale: (settings?.defaultLocale as Locale) || 'en',
   })
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -71,12 +48,7 @@ export function SettingsForm({ settings }: Props) {
           heroImageUrl: formData.heroImageUrl || null,
           aboutText: formData.aboutText || null,
           primaryColor: formData.primaryColor,
-          socialLinks: JSON.stringify({
-            instagram: formData.instagram || null,
-            facebook: formData.facebook || null,
-            youtube: formData.youtube || null,
-            spotify: formData.spotify || null,
-          }),
+          defaultLocale: formData.defaultLocale,
         }),
       })
 
@@ -161,6 +133,23 @@ export function SettingsForm({ settings }: Props) {
             rows={3}
           />
         </div>
+
+        <div>
+          <label htmlFor="defaultLocale" className="label">Default Language</label>
+          <p className="text-sm text-gray-500 mb-2">The language shown to visitors who haven't selected a preference.</p>
+          <select
+            id="defaultLocale"
+            value={formData.defaultLocale}
+            onChange={(e) => setFormData(prev => ({ ...prev, defaultLocale: e.target.value as Locale }))}
+            className="input"
+          >
+            {locales.map((locale) => (
+              <option key={locale} value={locale}>
+                {localeNames[locale]}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
 
       <div className="card p-6 space-y-6">
@@ -174,8 +163,8 @@ export function SettingsForm({ settings }: Props) {
               type="button"
               onClick={() => setFormData(prev => ({ ...prev, primaryColor: color.hex }))}
               className={`w-10 h-10 rounded-lg border-2 transition-all ${formData.primaryColor === color.hex
-                  ? 'border-gray-900 scale-110 shadow-lg'
-                  : 'border-transparent hover:scale-105'
+                ? 'border-gray-900 scale-110 shadow-lg'
+                : 'border-transparent hover:scale-105'
                 }`}
               style={{ backgroundColor: color.hex }}
               title={color.name}
@@ -221,58 +210,6 @@ export function SettingsForm({ settings }: Props) {
               </span>
             </div>
           </div>
-        </div>
-      </div>
-
-      <div className="card p-6 space-y-6">
-        <h2 className="text-lg font-semibold text-gray-900">Social Media Links</h2>
-
-        <div>
-          <label htmlFor="instagram" className="label">Instagram URL</label>
-          <input
-            id="instagram"
-            type="url"
-            value={formData.instagram}
-            onChange={(e) => setFormData(prev => ({ ...prev, instagram: e.target.value }))}
-            className="input"
-            placeholder="https://instagram.com/yourband"
-          />
-        </div>
-
-        <div>
-          <label htmlFor="facebook" className="label">Facebook URL</label>
-          <input
-            id="facebook"
-            type="url"
-            value={formData.facebook}
-            onChange={(e) => setFormData(prev => ({ ...prev, facebook: e.target.value }))}
-            className="input"
-            placeholder="https://facebook.com/yourband"
-          />
-        </div>
-
-        <div>
-          <label htmlFor="youtube" className="label">YouTube URL</label>
-          <input
-            id="youtube"
-            type="url"
-            value={formData.youtube}
-            onChange={(e) => setFormData(prev => ({ ...prev, youtube: e.target.value }))}
-            className="input"
-            placeholder="https://youtube.com/@yourband"
-          />
-        </div>
-
-        <div>
-          <label htmlFor="spotify" className="label">Spotify URL</label>
-          <input
-            id="spotify"
-            type="url"
-            value={formData.spotify}
-            onChange={(e) => setFormData(prev => ({ ...prev, spotify: e.target.value }))}
-            className="input"
-            placeholder="https://open.spotify.com/artist/..."
-          />
         </div>
       </div>
 

@@ -20,7 +20,7 @@ export async function PUT(req: NextRequest) {
         heroImageUrl: data.heroImageUrl,
         aboutText: data.aboutText,
         primaryColor: data.primaryColor,
-        socialLinks: data.socialLinks,
+        defaultLocale: data.defaultLocale,
       },
       create: {
         id: 'main',
@@ -29,7 +29,7 @@ export async function PUT(req: NextRequest) {
         heroImageUrl: data.heroImageUrl,
         aboutText: data.aboutText,
         primaryColor: data.primaryColor,
-        socialLinks: data.socialLinks,
+        defaultLocale: data.defaultLocale,
       },
     })
 

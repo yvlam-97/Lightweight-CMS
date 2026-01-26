@@ -1,0 +1,15 @@
+{
+    "concerts": {
+        "navName": "Concerts",
+        "title": "Concerts",
+        "upcomingConcerts": "Upcoming Concerts",
+        "pastConcerts": "Past Concerts",
+        "getTickets": "Get Tickets",
+        "noUpcoming": "No upcoming events scheduled. Check back soon!",
+        "noPast": "No past concerts to show.",
+        "venue": "Venue",
+        "date": "Date",
+        "time": "Time",
+        "location": "Location"
+    }
+}

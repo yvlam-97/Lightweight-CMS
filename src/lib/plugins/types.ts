@@ -103,6 +103,10 @@ export interface PluginDefinition {
   // Default base URL for public routes (can be customized by user)
   defaultPublicPath?: string
 
+  // Translations for each locale (e.g., { en: { pluginId: { ... } }, nl: { pluginId: { ... } } })
+  // These will be merged with the core translations
+  translations?: Record<string, Record<string, unknown>>
+
   // Admin navigation item (href should be /admin/p/[pluginId])
   adminNavigation?: PluginNavItem
 

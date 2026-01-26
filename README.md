@@ -4,13 +4,21 @@ A lightweight, extensible content management system built with Next.js. Features
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
+## The Story
+
+This project started as a simple website for my band. All I needed was a page to list upcoming concerts and maybe some news posts. Naturally, I ended up building a fully modular CMS with a plugin architecture, self-contained database schemas, dynamic routing, and a component system that would make enterprise software blush.
+
+Could I have just hardcoded a few pages? Absolutely. Did I spend more time building an extensible plugin system instead? You bet. Was it worth it? Ask me again when I add my second plugin.
+
 ## Features
 
 - **Plugin System** - Extend functionality with modular plugins
+- **Multi-language Support** - Built-in i18n with Dutch and English (easily extensible)
 - **Fully Responsive** - Works on all devices
 - **Easy Customization** - Change colors and branding from the admin panel
 - **News Posts** - Share updates with markdown support
 - **Custom Pages** - Create About, Contact, or any other pages
+- **Social Media Integration** - Configurable social media links (12+ platforms)
 - **Secure Admin** - Password-protected CMS with optional Google login
 - **Fast and Lightweight** - SQLite database, no external server required
 - **Easy Deployment** - Deploy to Vercel in minutes
@@ -114,13 +122,17 @@ Use [UI Colors](https://uicolors.app) to generate a full color palette from any 
 
 ### Site Settings
 
-After logging into the admin panel, go to Settings to customize:
+After logging into the admin panel, you can customize:
 
+**Settings:**
 - Site name
 - Tagline
 - About text
 - Brand color
-- Social media links
+
+**Social Media:**
+- Add/remove social media platforms
+- Configure links for Instagram, Facebook, X, YouTube, Spotify, TikTok, LinkedIn, and more
 
 ## Project Structure
 
@@ -136,7 +148,11 @@ lightweight-cms/
 ├── src/
 │   ├── app/
 │   │   ├── (public)/      # Public pages (home, news, etc.)
-│   │   ├── admin/         # CMS admin pages
+│   │   └── admin/         # CMS admin pages
+│   ├── i18n/              # Internationalization
+│   │   ├── config.ts      # Locale configuration
+│   │   ├── request.ts     # Translation loading
+│   │   └── messages/      # Translation files (en.json, nl.json)
 │   │   └── api/           # API routes
 │   ├── components/        # React components
 │   │   └── admin/         # Admin-specific components
