@@ -42,6 +42,6 @@ Could I have just hardcoded a few pages? Absolutely. Did I spend more time build
 
 ## Quick Links
 
-- [GitHub Repository](https://github.com/yourusername/lightweight-cms)
-- [Report an Issue](https://github.com/yourusername/lightweight-cms/issues)
-- [MIT License](https://github.com/yourusername/lightweight-cms/blob/main/LICENSE)
+- [GitHub Repository](https://github.com/yvlam-97/Lightweight-CMS)
+- [Report an Issue](https://github.com/yvlam-97/Lightweight-CMS/issues)
+- [MIT License](https://github.com/yvlam-97/Lightweight-CMS/blob/main/LICENSE)

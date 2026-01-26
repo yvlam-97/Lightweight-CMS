@@ -5,7 +5,7 @@
 ### 1. Clone and Install
 
 ```bash
-git clone https://github.com/yourusername/lightweight-cms.git
+git clone https://github.com/yvlam-97/Lightweight-CMS.git
 cd lightweight-cms
 npm install
 ```
