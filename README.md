@@ -43,7 +43,7 @@ The CMS includes a flexible plugin system that allows you to:
 
 ### Creating Plugins
 
-See the [Plugin Development Guide](src/plugins/PLUGIN_DEVELOPMENT.md) for detailed instructions on creating custom plugins.
+See the [Plugin Development Guide](src/plugins/docs/README.md) for detailed instructions on creating custom plugins.
 
 ## Tech Stack
 

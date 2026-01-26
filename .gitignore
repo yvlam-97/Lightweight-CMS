@@ -37,3 +37,4 @@ next-env.d.ts
 prisma/database.db
 prisma/database.db-journal
 prisma/schema/plugin-*.prisma
+prisma/schema/database.db
