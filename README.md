@@ -43,7 +43,7 @@ The CMS includes a flexible plugin system that allows you to:
 
 ### Creating Plugins
 
-See the [Plugin Development Guide](src/plugins/docs/README.md) for detailed instructions on creating custom plugins.
+See the [Plugin Development Guide](https://github.com/yvlam-97/Lightweight-CMS/wiki/Plugin-Development) for detailed instructions on creating custom plugins.
 
 ## Tech Stack
 
