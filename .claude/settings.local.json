@@ -9,7 +9,11 @@
       "Bash(npx tsc:*)",
       "Bash(taskkill:*)",
       "Bash(npm run db:push:*)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "Bash(tree:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\ndocs: fix API documentation inaccuracies and improve clarity\n\n- Fix PluginDefinition interface: publicPage -> publicPages, apiRoutes type correction\n- Remove duplicate table rows in Getting-Started-with-Plugins\n- Update Plugin-Tutorial apiRoutes syntax to match actual implementation\n- Improve documentation accuracy for plugin developers\n\nCo-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git push)"
     ]
   }
 }
