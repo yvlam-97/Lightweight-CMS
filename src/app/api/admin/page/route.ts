@@ -1,17 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getServerSession } from 'next-auth'
-import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
+import { withAuth, handleApiError } from '@/lib/api/middleware'
 
-export async function POST(req: NextRequest) {
-  const session = await getServerSession(authOptions)
-  if (!session) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-  }
-
+async function createPage(req: NextRequest) {
   try {
     const data = await req.json()
-    
+
     const page = await prisma.page.create({
       data: {
         title: data.title,
@@ -22,10 +16,9 @@ export async function POST(req: NextRequest) {
     })
 
     return NextResponse.json(page)
-  } catch (error: any) {
-    if (error.code === 'P2002') {
-      return NextResponse.json({ error: 'A page with this slug already exists' }, { status: 400 })
-    }
-    return NextResponse.json({ error: 'Failed to create page' }, { status: 500 })
+  } catch (error) {
+    return handleApiError(error, 'POST /api/admin/page')
   }
 }
+
+export const POST = withAuth(createPage)

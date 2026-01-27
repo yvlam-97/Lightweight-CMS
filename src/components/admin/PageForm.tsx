@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import { generateSlug } from '@/lib/utils'
 
 interface Page {
   id: string
@@ -27,13 +28,6 @@ export function PageForm({ page }: Props) {
     content: page?.content || '',
     published: page?.published || false,
   })
-
-  const generateSlug = (title: string) => {
-    return title
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, '-')
-      .replace(/(^-|-$)/g, '')
-  }
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const title = e.target.value

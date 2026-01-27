@@ -1,17 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getServerSession } from 'next-auth'
-import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
+import { withAuth, handleApiError } from '@/lib/api/middleware'
 
-export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
-  const session = await getServerSession(authOptions)
-  if (!session) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-  }
-
+async function updatePost(req: NextRequest, { params }: { params: { id: string } }) {
   try {
     const data = await req.json()
-    
+
     const post = await prisma.newsPost.update({
       where: { id: params.id },
       data: {
@@ -26,24 +20,19 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
     })
 
     return NextResponse.json(post)
-  } catch (error: any) {
-    if (error.code === 'P2002') {
-      return NextResponse.json({ error: 'A post with this slug already exists' }, { status: 400 })
-    }
-    return NextResponse.json({ error: 'Failed to update post' }, { status: 500 })
+  } catch (error) {
+    return handleApiError(error, 'PUT /api/admin/news/[id]')
   }
 }
 
-export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
-  const session = await getServerSession(authOptions)
-  if (!session) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-  }
-
+async function deletePost(req: NextRequest, { params }: { params: { id: string } }) {
   try {
     await prisma.newsPost.delete({ where: { id: params.id } })
     return NextResponse.json({ success: true })
   } catch (error) {
-    return NextResponse.json({ error: 'Failed to delete post' }, { status: 500 })
+    return handleApiError(error, 'DELETE /api/admin/news/[id]')
   }
 }
+
+export const PUT = withAuth(updatePost)
+export const DELETE = withAuth(deletePost)

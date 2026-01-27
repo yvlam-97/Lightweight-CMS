@@ -23,10 +23,6 @@ export async function loadPlugins(): Promise<PluginDefinition[]> {
         }
     }
 
-    if (loadedPlugins.length > 0) {
-        console.log(`Loaded ${loadedPlugins.length} plugin(s): ${loadedPlugins.map(p => p.id).join(', ')}`)
-    }
-
     return loadedPlugins
 }
 

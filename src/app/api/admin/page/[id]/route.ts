@@ -1,17 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getServerSession } from 'next-auth'
-import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
+import { withAuth, handleApiError } from '@/lib/api/middleware'
 
-export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
-  const session = await getServerSession(authOptions)
-  if (!session) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-  }
-
+async function updatePage(req: NextRequest, { params }: { params: { id: string } }) {
   try {
     const data = await req.json()
-    
+
     const page = await prisma.page.update({
       where: { id: params.id },
       data: {
@@ -23,24 +17,19 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
     })
 
     return NextResponse.json(page)
-  } catch (error: any) {
-    if (error.code === 'P2002') {
-      return NextResponse.json({ error: 'A page with this slug already exists' }, { status: 400 })
-    }
-    return NextResponse.json({ error: 'Failed to update page' }, { status: 500 })
+  } catch (error) {
+    return handleApiError(error, 'PUT /api/admin/page/[id]')
   }
 }
 
-export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
-  const session = await getServerSession(authOptions)
-  if (!session) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-  }
-
+async function deletePage(req: NextRequest, { params }: { params: { id: string } }) {
   try {
     await prisma.page.delete({ where: { id: params.id } })
     return NextResponse.json({ success: true })
   } catch (error) {
-    return NextResponse.json({ error: 'Failed to delete page' }, { status: 500 })
+    return handleApiError(error, 'DELETE /api/admin/page/[id]')
   }
 }
+
+export const PUT = withAuth(updatePage)
+export const DELETE = withAuth(deletePage)

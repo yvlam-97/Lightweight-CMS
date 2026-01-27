@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import { generateSlug } from '@/lib/utils'
 
 interface Album {
     id: string
@@ -28,13 +29,6 @@ export function AlbumForm({ album }: Props) {
         description: album?.description || '',
         published: album?.published || false,
     })
-
-    const generateSlug = (title: string) => {
-        return title
-            .toLowerCase()
-            .replace(/[^a-z0-9]+/g, '-')
-            .replace(/^-|-$/g, '')
-    }
 
     const handleTitleChange = (value: string) => {
         setFormData((prev) => ({

@@ -78,7 +78,7 @@ export interface PluginSettingField {
   label: string
   type: 'text' | 'number' | 'boolean' | 'select' | 'url'
   description?: string
-  defaultValue?: any
+  defaultValue?: string | number | boolean | string[]
   options?: { label: string; value: string }[] // For select type
   required?: boolean
 }
@@ -139,7 +139,7 @@ export interface PluginInstance extends PluginDefinition {
   customPublicPath?: string
 
   // Plugin-specific settings values
-  settings?: Record<string, any>
+  settings?: Record<string, string | number | boolean | string[]>
 }
 
 // Plugin state stored in database
