@@ -11,6 +11,7 @@ export const pluginModules: Record<
     () => Promise<{ default: PluginDefinition }>
 > = {
     concerts: () => import('@plugins/concerts'),
+    photos: () => import('@plugins/photos'),
 }
 
 /**

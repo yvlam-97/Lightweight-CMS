@@ -18,7 +18,28 @@ export async function GET(req: NextRequest) {
     try {
         await ensurePluginsLoaded()
         const plugins = await getAllPlugins()
-        return NextResponse.json({ plugins })
+
+        // Serialize only the data needed by the client
+        // (PluginInstance includes React components and functions that can't be JSON serialized)
+        const serializedPlugins = plugins.map(p => ({
+            id: p.id,
+            name: p.name,
+            description: p.description,
+            version: p.version,
+            author: p.author,
+            enabled: p.enabled,
+            defaultPublicPath: p.defaultPublicPath,
+            customPublicPath: p.customPublicPath,
+            settings: p.settings,
+            settingsFields: p.settingsFields,
+            // Include navigation info for sidebar (but not the icon component)
+            adminNavigation: p.adminNavigation ? {
+                name: p.adminNavigation.name,
+                href: p.adminNavigation.href,
+            } : undefined,
+        }))
+
+        return NextResponse.json({ plugins: serializedPlugins })
     } catch (error) {
         console.error('Error fetching plugins:', error)
         return NextResponse.json(

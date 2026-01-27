@@ -8,9 +8,10 @@ interface Props {
   type: 'news' | 'page'
   name: string
   apiPath?: string
+  onDeleted?: () => void
 }
 
-export function DeleteButton({ id, type, name, apiPath }: Props) {
+export function DeleteButton({ id, type, name, apiPath, onDeleted }: Props) {
   const router = useRouter()
   const [isPending, startTransition] = useTransition()
   const [showConfirm, setShowConfirm] = useState(false)
@@ -24,7 +25,11 @@ export function DeleteButton({ id, type, name, apiPath }: Props) {
       })
 
       if (res.ok) {
-        router.refresh()
+        if (onDeleted) {
+          onDeleted()
+        } else {
+          router.refresh()
+        }
         setShowConfirm(false)
       }
     })

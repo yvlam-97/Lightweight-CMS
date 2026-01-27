@@ -8,6 +8,9 @@
     "build": "npm run db:sync && prisma generate && next build",
     "start": "next start",
     "lint": "next lint",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
     "db:sync": "tsx scripts/sync-plugin-schemas.ts",
     "db:push": "npm run db:sync && prisma db push",
     "db:generate": "npm run db:sync && prisma generate",
@@ -24,17 +27,22 @@
     "next-auth": "4.24.13",
     "next-intl": "3.26.5",
     "react": "18.3.1",
-    "react-dom": "18.3.1"
+    "react-dom": "18.3.1",
+    "server-only": "^0.0.1",
+    "uploadthing": "^7.7.4"
   },
   "devDependencies": {
     "@types/bcryptjs": "2.4.6",
+    "@types/jest": "^30.0.0",
     "@types/node": "20.17.50",
     "@types/react": "18.3.27",
     "@types/react-dom": "18.3.7",
     "autoprefixer": "10.4.21",
+    "jest": "^30.2.0",
     "postcss": "8.5.6",
     "prisma": "5.22.0",
     "tailwindcss": "^3.4.19",
+    "ts-jest": "^29.4.6",
     "tsx": "4.19.4",
     "typescript": "^5.9.3"
   }

@@ -1,0 +1,5 @@
+export { AlbumListPage } from './AlbumListPage'
+export { AlbumNewPage } from './AlbumNewPage'
+export { AlbumEditPage } from './AlbumEditPage'
+export { GalleryPage } from './GalleryPage'
+export { AlbumViewPage } from './AlbumViewPage'

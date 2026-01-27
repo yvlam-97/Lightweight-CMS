@@ -1,0 +1,57 @@
+// Photo Album Plugin Schema
+// This file is automatically copied to prisma/schema/ during build
+
+model Album {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  description String?
+  coverPhotoId String?
+  published   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  photos      Photo[]
+}
+
+model Photo {
+  id          String   @id @default(cuid())
+  albumId     String
+  album       Album    @relation(fields: [albumId], references: [id], onDelete: Cascade)
+  // Storage key - used to identify file in storage (SQLite, S3, etc.)
+  storageKey  String
+  // Public URL to the image (API route for SQLite, direct URL for cloud)
+  url         String
+  // Optional thumbnail URL
+  thumbnailUrl String?
+  // Original filename
+  filename    String
+  // File size in bytes
+  size        Int
+  // MIME type
+  mimeType    String
+  // Image dimensions
+  width       Int?
+  height      Int?
+  // Display order within album
+  order       Int      @default(0)
+  // Optional metadata
+  title       String?
+  caption     String?
+  altText     String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// File storage table for SQLite storage provider
+// Stores actual file data as base64 in the database
+model FileStorage {
+  id        String   @id @default(cuid())
+  key       String   @unique  // Unique identifier for the file
+  filename  String            // Original filename
+  mimeType  String            // MIME type (image/jpeg, etc.)
+  size      Int               // File size in bytes
+  data      String            // Base64-encoded file data
+  width     Int?              // Image width (if applicable)
+  height    Int?              // Image height (if applicable)
+  createdAt DateTime @default(now())
+}

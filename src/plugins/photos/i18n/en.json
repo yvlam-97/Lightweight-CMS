@@ -1,0 +1,32 @@
+{
+    "photos": {
+        "navName": "Photo Albums",
+        "title": "Photo Albums",
+        "albums": "Albums",
+        "photos": "Photos",
+        "createAlbum": "Create Album",
+        "editAlbum": "Edit Album",
+        "newAlbum": "New Album",
+        "albumTitle": "Album Title",
+        "albumSlug": "URL Slug",
+        "albumDescription": "Description",
+        "coverPhoto": "Cover Photo",
+        "uploadPhotos": "Upload Photos",
+        "dragDropPhotos": "Drag & drop photos here, or click to select",
+        "uploading": "Uploading...",
+        "uploadComplete": "Upload complete",
+        "uploadFailed": "Upload failed",
+        "photoTitle": "Photo Title",
+        "photoCaption": "Caption",
+        "photoAlt": "Alt Text",
+        "deletePhoto": "Delete Photo",
+        "deletePhotoConfirm": "Are you sure you want to delete this photo?",
+        "setAsCover": "Set as Cover",
+        "viewAlbum": "View Album",
+        "emptyAlbum": "This album has no photos yet.",
+        "noAlbums": "No photo albums yet. Create your first album!",
+        "photoCount": "{count} photos",
+        "published": "Published",
+        "draft": "Draft"
+    }
+}

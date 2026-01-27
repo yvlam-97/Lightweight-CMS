@@ -1,0 +1,32 @@
+{
+    "photos": {
+        "navName": "Fotoalbums",
+        "title": "Fotoalbums",
+        "albums": "Albums",
+        "photos": "Foto's",
+        "createAlbum": "Album aanmaken",
+        "editAlbum": "Album bewerken",
+        "newAlbum": "Nieuw album",
+        "albumTitle": "Albumtitel",
+        "albumSlug": "URL-slug",
+        "albumDescription": "Beschrijving",
+        "coverPhoto": "Omslagfoto",
+        "uploadPhotos": "Foto's uploaden",
+        "dragDropPhotos": "Sleep foto's hierheen of klik om te selecteren",
+        "uploading": "Uploaden...",
+        "uploadComplete": "Upload voltooid",
+        "uploadFailed": "Upload mislukt",
+        "photoTitle": "Fototitel",
+        "photoCaption": "Bijschrift",
+        "photoAlt": "Alt-tekst",
+        "deletePhoto": "Foto verwijderen",
+        "deletePhotoConfirm": "Weet je zeker dat je deze foto wilt verwijderen?",
+        "setAsCover": "Als omslag instellen",
+        "viewAlbum": "Album bekijken",
+        "emptyAlbum": "Dit album bevat nog geen foto's.",
+        "noAlbums": "Nog geen fotoalbums. Maak je eerste album!",
+        "photoCount": "{count} foto's",
+        "published": "Gepubliceerd",
+        "draft": "Concept"
+    }
+}
