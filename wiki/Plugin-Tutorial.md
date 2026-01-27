@@ -348,6 +348,7 @@ Add your plugin to `src/lib/plugins/modules.ts`:
 ```typescript
 export const pluginModules: Record<string, () => Promise<{ plugin: PluginDefinition }>> = {
   concerts: () => import('@plugins/concerts'),
+  photos: () => import('@plugins/photos'),
   'your-plugin': () => import('@plugins/your-plugin'),  // Add this line
 }
 ```

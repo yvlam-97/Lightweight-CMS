@@ -137,7 +137,7 @@ export function PhotoGrid({
 
                         {/* Action buttons - at top of thumbnail, always visible */}
                         {editable && (
-                            <div 
+                            <div
                                 className="absolute top-0 left-0 right-0 bg-gray-900 flex items-center justify-center gap-1 py-1 px-1"
                                 style={{ zIndex: 20 }}
                             >

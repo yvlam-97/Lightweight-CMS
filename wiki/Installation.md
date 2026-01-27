@@ -114,7 +114,8 @@ lightweight-cms/
 │   │   ├── prisma.ts      # Database client
 │   │   └── auth.ts        # Authentication
 │   └── plugins/           # Plugin implementations
-│       └── concerts/      # Concerts plugin (with schema.prisma)
+│       ├── concerts/      # Concerts plugin (with schema.prisma)
+│       └── photos/        # Photos plugin (with schema.prisma)
 ├── tailwind.config.ts     # Color customization
 └── .env.example           # Environment template
 ```

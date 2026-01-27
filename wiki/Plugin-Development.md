@@ -8,9 +8,11 @@ The CMS includes a flexible plugin system that allows you to extend functionalit
 - **Custom Public URLs** - Configure the URL path for each plugin's public pages
 - **Create Your Own** - Build custom plugins to extend functionality
 
+
 ## Built-in Plugins
 
 - **Concerts** - Manage concerts, shows, and events with venue information, dates, and ticket links
+- **Photos** - Manage photo albums and galleries with upload, cover selection, and lightbox viewing
 
 ## Managing Plugins
 
@@ -36,7 +38,7 @@ The CMS includes a flexible plugin system that allows you to extend functionalit
 
 ## Example Plugin
 
-See the `concerts` plugin in `src/plugins/concerts/` for a complete working example of:
+See the `concerts` and `photos` plugins in `src/plugins/` for complete working examples of:
 
 - Admin pages (list, create, edit)
 - Public page with upcoming/past sections
