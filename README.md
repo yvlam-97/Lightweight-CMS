@@ -23,6 +23,19 @@ Could I have just hardcoded a few pages? Absolutely. Did I spend more time build
 - **Fast and Lightweight** - SQLite database, no external server required
 - **Easy Deployment** - Deploy to Vercel in minutes
 
+## Documentation
+
+Complete documentation is available in the [`/docs`](/docs) folder:
+
+| Document | Description |
+|----------|-------------|
+| [Installation Guide](/docs/Installation.md) | Setup and configuration instructions |
+| [Plugin Development](/docs/Plugin-Development.md) | Overview of the plugin system |
+| [Getting Started with Plugins](/docs/Getting-Started-with-Plugins.md) | Plugin architecture and structure |
+| [Plugin Tutorial](/docs/Plugin-Tutorial.md) | Step-by-step plugin creation guide |
+| [Plugin API Reference](/docs/Plugin-API-Reference.md) | Complete API documentation |
+| [Plugin Internationalization](/docs/Plugin-Internationalization.md) | Adding translations to plugins |
+
 ## Plugin System
 
 The CMS includes a flexible plugin system that allows you to:
@@ -43,7 +56,7 @@ The CMS includes a flexible plugin system that allows you to:
 
 ### Creating Plugins
 
-See the [Plugin Development Guide](https://github.com/yvlam-97/Lightweight-CMS/wiki/Plugin-Development) for detailed instructions on creating custom plugins.
+See the [Plugin Development Guide](/docs/Plugin-Development.md) for detailed instructions on creating custom plugins.
 
 ## Tech Stack
 
@@ -138,6 +151,10 @@ After logging into the admin panel, you can customize:
 
 ```
 lightweight-cms/
+├── docs/                  # Documentation
+│   ├── Installation.md
+│   ├── Plugin-Development.md
+│   └── ...
 ├── prisma/
 │   ├── schema/            # Multi-file Prisma schema
 │   │   ├── base.prisma    # Core database models
@@ -148,21 +165,23 @@ lightweight-cms/
 ├── src/
 │   ├── app/
 │   │   ├── (public)/      # Public pages (home, news, etc.)
-│   │   └── admin/         # CMS admin pages
+│   │   ├── admin/         # CMS admin pages
+│   │   └── api/           # API routes
+│   ├── components/        # React components
+│   │   └── admin/         # Admin-specific components
 │   ├── i18n/              # Internationalization
 │   │   ├── config.ts      # Locale configuration
 │   │   ├── request.ts     # Translation loading
 │   │   └── messages/      # Translation files (en.json, nl.json)
-│   │   └── api/           # API routes
-│   ├── components/        # React components
-│   │   └── admin/         # Admin-specific components
 │   ├── lib/
+│   │   ├── api/           # API utilities and middleware
 │   │   ├── plugins/       # Plugin system
 │   │   ├── prisma.ts      # Database client
-│   │   └── auth.ts        # Authentication
+│   │   ├── auth.ts        # Authentication
+│   │   └── utils.ts       # Shared utilities
 │   └── plugins/           # Plugin implementations
 │       ├── concerts/      # Concerts plugin (with schema.prisma)
-│       └── PLUGIN_DEVELOPMENT.md
+│       └── photos/        # Photos plugin (with schema.prisma)
 ├── tailwind.config.ts     # Color customization
 └── .env.example           # Environment template
 ```
