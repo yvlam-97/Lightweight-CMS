@@ -201,6 +201,6 @@ To add support for a new locale:
 
 ## Related Pages
 
-- [Getting Started with Plugins](Getting-Started-with-Plugins)
-- [Plugin Tutorial](Plugin-Tutorial)
-- [Plugin API Reference](Plugin-API-Reference)
+- [Getting Started with Plugins](Getting-Started-with-Plugins.md)
+- [Plugin Tutorial](Plugin-Tutorial.md)
+- [Plugin API Reference](Plugin-API-Reference.md)

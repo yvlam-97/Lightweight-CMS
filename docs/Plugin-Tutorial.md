@@ -339,7 +339,7 @@ Create `src/plugins/your-plugin/i18n/nl.json`:
 }
 ```
 
-See [Plugin Internationalization](Plugin-Internationalization) for more details on translations.
+See [Plugin Internationalization](Plugin-Internationalization.md) for more details on translations.
 
 ## 8. Register Your Plugin
 
@@ -367,5 +367,5 @@ Your plugin is now ready! Visit `/admin/p/your-plugin` to see it in action.
 
 ## Next Steps
 
-- [Plugin API Reference](Plugin-API-Reference) - Complete API documentation
-- [Plugin Internationalization](Plugin-Internationalization) - Add multi-language support
+- [Plugin API Reference](Plugin-API-Reference.md) - Complete API documentation
+- [Plugin Internationalization](Plugin-Internationalization.md) - Add multi-language support

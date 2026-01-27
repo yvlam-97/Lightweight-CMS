@@ -24,10 +24,10 @@ The CMS includes a flexible plugin system that allows you to extend functionalit
 
 | Page | Description |
 |------|-------------|
-| [Getting Started with Plugins](Getting-Started-with-Plugins) | Plugin architecture and structure |
-| [Plugin Tutorial](Plugin-Tutorial) | Step-by-step plugin creation guide |
-| [Plugin API Reference](Plugin-API-Reference) | Complete API documentation |
-| [Plugin Internationalization](Plugin-Internationalization) | Adding translations to plugins |
+| [Getting Started with Plugins](Getting-Started-with-Plugins.md) | Plugin architecture and structure |
+| [Plugin Tutorial](Plugin-Tutorial.md) | Step-by-step plugin creation guide |
+| [Plugin API Reference](Plugin-API-Reference.md) | Complete API documentation |
+| [Plugin Internationalization](Plugin-Internationalization.md) | Adding translations to plugins |
 
 ## Quick Start
 

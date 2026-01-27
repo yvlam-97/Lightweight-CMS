@@ -25,12 +25,12 @@ Could I have just hardcoded a few pages? Absolutely. Did I spend more time build
 
 | Page | Description |
 |------|-------------|
-| [Installation](Installation) | Setup and configuration guide |
-| [Plugin Development](Plugin-Development) | Overview of the plugin system |
-| [Getting Started with Plugins](Getting-Started-with-Plugins) | Plugin architecture and structure |
-| [Plugin Tutorial](Plugin-Tutorial) | Step-by-step plugin creation guide |
-| [Plugin API Reference](Plugin-API-Reference) | Complete API documentation |
-| [Plugin Internationalization](Plugin-Internationalization) | Adding translations to plugins |
+| [Installation](Installation.md) | Setup and configuration guide |
+| [Plugin Development](Plugin-Development.md) | Overview of the plugin system |
+| [Getting Started with Plugins](Getting-Started-with-Plugins.md) | Plugin architecture and structure |
+| [Plugin Tutorial](Plugin-Tutorial.md) | Step-by-step plugin creation guide |
+| [Plugin API Reference](Plugin-API-Reference.md) | Complete API documentation |
+| [Plugin Internationalization](Plugin-Internationalization.md) | Adding translations to plugins |
 
 ## Tech Stack
 

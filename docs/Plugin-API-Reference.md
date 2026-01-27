@@ -243,6 +243,6 @@ npm run db:generate  # Sync and regenerate Prisma client
 
 ## Related Pages
 
-- [Getting Started with Plugins](Getting-Started-with-Plugins)
-- [Plugin Tutorial](Plugin-Tutorial)
-- [Plugin Internationalization](Plugin-Internationalization)
+- [Getting Started with Plugins](Getting-Started-with-Plugins.md)
+- [Plugin Tutorial](Plugin-Tutorial.md)
+- [Plugin Internationalization](Plugin-Internationalization.md)
