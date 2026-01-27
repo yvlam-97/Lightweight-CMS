@@ -7,16 +7,18 @@ model Album {
   slug        String   @unique
   description String?
   coverPhotoId String?
+  coverPhoto  Photo?   @relation("AlbumCoverPhoto", fields: [coverPhotoId], references: [id])
   published   Boolean  @default(false)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-  photos      Photo[]
+  photos      Photo[]  @relation("AlbumPhotos")
 }
 
 model Photo {
   id          String   @id @default(cuid())
   albumId     String
-  album       Album    @relation(fields: [albumId], references: [id], onDelete: Cascade)
+  album       Album    @relation("AlbumPhotos", fields: [albumId], references: [id], onDelete: Cascade)
+  coverForAlbums Album[] @relation("AlbumCoverPhoto")
   // Storage key - used to identify file in storage (SQLite, S3, etc.)
   storageKey  String
   // Public URL to the image (API route for SQLite, direct URL for cloud)

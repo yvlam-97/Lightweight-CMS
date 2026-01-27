@@ -106,7 +106,7 @@ export function AlbumListPage({ pluginId }: Props) {
                             className="card overflow-hidden group"
                         >
                             {/* Cover image */}
-                            <div className="relative aspect-[16/10] bg-gray-100 dark:bg-gray-800">
+                            <div className="relative w-full aspect-[16/10] bg-gray-100 dark:bg-gray-800">
                                 {album.coverImage ? (
                                     <img
                                         src={album.coverImage}

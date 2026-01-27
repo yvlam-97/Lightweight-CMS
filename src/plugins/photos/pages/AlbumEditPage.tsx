@@ -128,6 +128,11 @@ export function AlbumEditPage({ params, pluginId }: Props) {
     }
 
     const handleDeletePhoto = async (photoId: string) => {
+        if (!album) return
+
+        // Save original state for rollback
+        const originalPhotos = album.photos
+
         // Optimistic update
         setAlbum((prev) => {
             if (!prev) return prev
@@ -137,22 +142,59 @@ export function AlbumEditPage({ params, pluginId }: Props) {
             }
         })
 
-        // Delete from server
-        await fetch(`/api/p/photos/photo/${photoId}`, {
-            method: 'DELETE',
-        })
+        try {
+            // Delete from server
+            const res = await fetch(`/api/p/photos/photo/${photoId}`, {
+                method: 'DELETE',
+            })
+
+            if (!res.ok) {
+                throw new Error('Failed to delete photo')
+            }
+
+            // If deleted photo was the cover, clear cover
+            if (formData.coverPhotoId === photoId) {
+                setFormData((prev) => ({ ...prev, coverPhotoId: null }))
+            }
+        } catch (err) {
+            // Rollback on error
+            setAlbum((prev) => {
+                if (!prev) return prev
+                return { ...prev, photos: originalPhotos }
+            })
+            setError(err instanceof Error ? err.message : 'Failed to delete photo')
+        }
     }
 
     const handleSetCover = async (photoId: string) => {
+        if (!albumId) return
+
+        // Save previous cover for rollback
+        const previousCoverPhotoId = formData.coverPhotoId
+
+        // Optimistic update
         setFormData((prev) => ({ ...prev, coverPhotoId: photoId }))
 
-        // Save immediately
-        if (albumId) {
-            await fetch(`/api/p/photos/${albumId}`, {
+        try {
+            // Build updated formData with new cover photo
+            const updatedData = {
+                ...formData,
+                coverPhotoId: photoId,
+            }
+
+            const res = await fetch(`/api/p/photos/${albumId}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ ...formData, coverPhotoId: photoId }),
+                body: JSON.stringify(updatedData),
             })
+
+            if (!res.ok) {
+                throw new Error('Failed to set cover photo')
+            }
+        } catch (err) {
+            // Rollback on error
+            setFormData((prev) => ({ ...prev, coverPhotoId: previousCoverPhotoId }))
+            setError(err instanceof Error ? err.message : 'Failed to set cover photo')
         }
     }
 

@@ -94,7 +94,7 @@ export function GalleryPage({ publicPath }: Props) {
                             href={`${publicPath}/${album.slug}`}
                             className="group block"
                         >
-                            <div className="relative aspect-[4/3] rounded-lg overflow-hidden bg-gray-200 dark:bg-gray-700 shadow-lg">
+                            <div className="relative w-full aspect-[4/3] rounded-lg overflow-hidden bg-gray-200 dark:bg-gray-700 shadow-lg">
                                 {album.coverImage ? (
                                     <img
                                         src={album.coverImage}
@@ -120,7 +120,7 @@ export function GalleryPage({ publicPath }: Props) {
                                 )}
 
                                 {/* Overlay */}
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity pointer-events-none" />
 
                                 {/* Album info */}
                                 <div className="absolute bottom-0 left-0 right-0 p-6 text-white">

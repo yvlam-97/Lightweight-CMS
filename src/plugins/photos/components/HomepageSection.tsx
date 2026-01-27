@@ -8,6 +8,7 @@ async function getRecentAlbums() {
         const albums = await prisma.album.findMany({
             where: { published: true },
             include: {
+                coverPhoto: true,
                 photos: {
                     orderBy: { order: 'asc' },
                     take: 4,
@@ -49,9 +50,8 @@ export async function PhotosHomepageSection({ publicPath }: HomepageSectionProps
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {albums.map((album) => {
-                        const coverPhoto = album.coverPhotoId
-                            ? album.photos.find((p) => p.id === album.coverPhotoId) || album.photos[0]
-                            : album.photos[0]
+                        const coverPhoto = album.coverPhoto || album.photos[0]
+                        const imageSrc = coverPhoto ? (coverPhoto.thumbnailUrl || coverPhoto.url) : null
 
                         return (
                             <Link
@@ -59,10 +59,10 @@ export async function PhotosHomepageSection({ publicPath }: HomepageSectionProps
                                 href={`${publicPath}/${album.slug}`}
                                 className="group block"
                             >
-                                <div className="relative aspect-[4/3] rounded-lg overflow-hidden bg-gray-200 dark:bg-gray-700">
-                                    {coverPhoto ? (
+                                <div className="relative w-full aspect-[4/3] rounded-lg overflow-hidden bg-gray-200 dark:bg-gray-700">
+                                    {imageSrc ? (
                                         <img
-                                            src={coverPhoto.thumbnailUrl || coverPhoto.url}
+                                            src={imageSrc}
                                             alt={album.title}
                                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                                         />
@@ -85,7 +85,7 @@ export async function PhotosHomepageSection({ publicPath }: HomepageSectionProps
                                     )}
 
                                     {/* Overlay */}
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none" />
 
                                     {/* Album info */}
                                     <div className="absolute bottom-0 left-0 right-0 p-4 text-white">

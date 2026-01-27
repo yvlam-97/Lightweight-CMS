@@ -17,9 +17,10 @@ export const GET: ApiRouteHandler = async (req) => {
         const albums = await prisma.album.findMany({
             where: publishedOnly ? { published: true } : undefined,
             include: {
+                coverPhoto: true,
                 photos: {
                     orderBy: { order: 'asc' },
-                    take: 1, // Just get first photo for thumbnail
+                    take: 1,
                 },
                 _count: {
                     select: { photos: true },
@@ -36,10 +37,7 @@ export const GET: ApiRouteHandler = async (req) => {
             description: album.description,
             published: album.published,
             photoCount: album._count.photos,
-            coverImage: album.coverPhotoId
-                ? album.photos.find((p) => p.id === album.coverPhotoId)?.url ||
-                album.photos[0]?.url
-                : album.photos[0]?.url || null,
+            coverImage: album.coverPhoto?.url || album.photos[0]?.url || null,
             createdAt: album.createdAt,
             updatedAt: album.updatedAt,
         }))
