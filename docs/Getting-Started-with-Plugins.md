@@ -57,9 +57,6 @@ Plugins use dynamic routes for all pages and API endpoints:
 
 | Type | URL Pattern | Example |
 |------|-------------|---------|
-| Admin Pages | `/admin/p/[pluginId]/[...path]` | `/admin/p/concerts/new` |
-| Public Pages | Configurable via admin | `/concerts`, `/shows`, etc. |
-| API Routes | `/api/p/[pluginId]/[...path]` | `/api/p/concerts/abc123` |
 | Admin Pages | `/admin/p/[pluginId]/[...path]` | `/admin/p/concerts/new`, `/admin/p/photos/new` |
 | Public Pages | Configurable via admin | `/concerts`, `/photos`, `/shows`, etc. |
 | API Routes | `/api/p/[pluginId]/[...path]` | `/api/p/concerts/abc123`, `/api/p/photos/abc123` |

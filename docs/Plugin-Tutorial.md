@@ -69,10 +69,10 @@ export const plugin: PluginDefinition = {
   },
 
   // API routes
-  apiRoutes: {
-    '': itemsApi,
-    '[id]': itemByIdApi,
-  },
+  apiRoutes: [
+    { path: '', GET: itemsApi.GET, POST: itemsApi.POST },
+    { path: '[id]', GET: itemByIdApi.GET, PUT: itemByIdApi.PUT, DELETE: itemByIdApi.DELETE },
+  ],
 
   // Translations
   translations: {

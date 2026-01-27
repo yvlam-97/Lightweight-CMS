@@ -17,9 +17,9 @@ interface PluginDefinition {
   defaultPublicPath?: string
   adminNavigation?: AdminNavigation
   adminPages?: AdminPageDefinition[]
-  publicPage?: ComponentType
+  publicPages?: PluginPublicPage[]
   homepageSection?: PluginHomepageSection
-  apiRoutes?: Record<string, ApiRouteHandler>
+  apiRoutes?: PluginApiRoute[]
   translations?: Record<string, Record<string, unknown>>
   onEnable?: () => Promise<void>
   onDisable?: () => Promise<void>
@@ -38,9 +38,9 @@ interface PluginDefinition {
 | `defaultPublicPath` | `string` | No | Default URL path for public pages |
 | `adminNavigation` | `object` | No | Admin sidebar navigation config |
 | `adminPages` | `array` | No | Array of admin page definitions |
-| `publicPage` | `Component` | No | React component for public page |
+| `publicPages` | `array` | No | Array of public page definitions |
 | `homepageSection` | `object` | No | Homepage section configuration |
-| `apiRoutes` | `object` | No | Map of route keys to API handlers |
+| `apiRoutes` | `array` | No | Array of API route definitions |
 | `translations` | `object` | No | Locale-keyed translation objects |
 | `onEnable` | `function` | No | Called when plugin is enabled |
 | `onDisable` | `function` | No | Called when plugin is disabled |
