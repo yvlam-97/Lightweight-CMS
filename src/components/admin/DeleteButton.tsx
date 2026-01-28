@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 
 interface Props {
   id: string
-  type: 'news' | 'page'
+  type: 'news' | 'page' | 'user'
   name: string
   apiPath?: string
   onDeleted?: () => void
